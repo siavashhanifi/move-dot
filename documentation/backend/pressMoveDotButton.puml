@@ -1,0 +1,8 @@
+@startuml
+
+user -> frontend: pressMoveDotButton(direction)
+frontend -> backend: {http PATCH /dotPosition, direction}
+
+MoveDotController -> DotPosition: move(Direction)
+
+@enduml

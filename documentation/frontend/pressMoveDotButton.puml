@@ -1,0 +1,14 @@
+@startuml
+
+user -> frontend: pressMoveDotButton(direction)
+
+alt direction == x
+MovementButtons -> Button**: Button( onClick: moveDotX )
+MovementButtons <-- Button: moveDotXButton
+else direction == y 
+MovementButtons -> Button**: Button( onClick: moveDotY )
+MovementButtons <-- Button: moveDotYButton
+end
+
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+
+Index -> BackendCommunicator**: BackendCommunicator(ip, port)
+Index <-- BackendCommunicator:  backendCommunicator
+
+Index -> DotPosition**: DotPosition()
+Index <-- BackendCommunicator: dotPosition
+
+Index -> Controller**: Controller(backendCommunicator, dotPosition)
+
+
+@enduml

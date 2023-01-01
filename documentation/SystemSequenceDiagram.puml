@@ -1,0 +1,13 @@
+@startuml
+
+user->browser: openPage www.myapp.com
+browser -> httpServer: {HTTP GET /}
+browser <-- httpServer: {HTTP 200 OK, ..., myAppFrontend}
+user <-- browser: MyAppFrontend
+
+user -> frontend: pressMoveDotButton(direction);
+frontend -> backend: {HTTP PATCH /dotPosition, direction}
+
+frontend <-- backend: {HTTP OK 200, newDotPosition}
+user <-- frontend: dot movement in specified direction;
+@enduml

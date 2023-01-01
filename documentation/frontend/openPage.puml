@@ -1,0 +1,14 @@
+@startuml
+
+node apacheHttpServer
+node myAppFrontend
+node browser
+actor user
+
+user -> browser: interacts with
+
+apacheHttpServer -> myAppFrontend: serves
+browser --> apacheHttpServer: fetches frontend from
+browser -> myAppFrontend: presents 
+
+@enduml

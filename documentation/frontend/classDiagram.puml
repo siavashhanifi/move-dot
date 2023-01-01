@@ -1,0 +1,79 @@
+@startuml
+
+package startup
+{
+    class Index{
+
+    }
+}
+
+package view {
+    class MoveUpButton
+    class MoveDownButton
+    class MoveLeftButton
+    class MoveRightButton
+
+    class MovementButtons
+    {
+        MoveUpButton
+        MoveDownButton
+        MoveLeftButton
+        MoveRightButton
+    }
+
+    class DotDisplayCanvas
+}
+
+
+package controller {
+    class Controller{
+        -backendCommunicator : BackendCommunicator
+        -dotPosition : DotPosition
+        +moveDot(direction : MoveDotDirections) : newDotPosition
+    }
+}
+
+package network {
+    class BackendCommunicator{
+        -ip : String
+        -port : int
+    }
+}
+
+package model {
+
+enum MoveDotDirections {
+    MOVE_UP
+    MOVE_DOWN
+    MOVE_LEFT
+    MOVE_RIGHT
+}
+class DotPosition
+    {
+        -x : int
+        -y : int
+        +getX() : int
+        +getY() : int
+        +setX() : void
+        +setY() : void
+    }
+}
+
+Index --> view
+Index --> controller
+Index --> model
+Index --> network
+
+MovementButtons --> MoveDownButton
+MovementButtons --> MoveUpButton
+MovementButtons --> MoveLeftButton
+MovementButtons --> MoveRightButton
+
+view --> Controller
+view --> MoveDotDirections
+
+Controller --> DotPosition
+Controller --> BackendCommunicator
+Controller -> MoveDotDirections
+
+@enduml
