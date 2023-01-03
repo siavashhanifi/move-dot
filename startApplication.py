@@ -1,26 +1,55 @@
 import subprocess
 import os
+import signal
 
-relativePathToBackendServer = "./compiled/backend/rest-service-0.0.1-SNAPSHOT.jar"
-relativePathToFrontendFiles = "./compiled/frontend/html"
+relativePathToBackendServerJar = "./compiled/backend/move-dot-0.0.1.jar"
+relativePathToFrontendFiles    = "./compiled/frontend/html"
+
+backendProccess   = None
+httpServerProcess = None
 
 def runBackend():
-    subprocess.Popen(["java", "-jar", relativePathToBackendServer], stdout=subprocess.DEVNULL)
+    global backendProcess
+    backendProcess = subprocess.Popen(["java", "-jar", relativePathToBackendServerJar], stdout=subprocess.DEVNULL)
 
 def runFrontend():
-    popen = subprocess.Popen(["python3","-m","http.server",
-                              "--directory", relativePathToFrontendFiles,
-                              "802"], stdout=subprocess.DEVNULL)
+    global httpServerProcess
+    httpServerProcess = subprocess.Popen(["python3","-m","http.server",
+                                          "--directory", relativePathToFrontendFiles,
+                                          "8081"], stdout=subprocess.DEVNULL)
 
 def waitForUserToExit():
-    os.wait()
+    httpServerProcess.wait()
+
+def cleanUpResources():
+    global backendProcess
+    global httpServerProcess
+    
+    if backendProcess != None:
+        backendProcess.kill()
+        print("Shut down backend")
+
+    if httpServerProcess != None:
+        httpServerProcess.kill()
+        print("Shut down http server")
+
+def handleStopSignals(signum, frame):
+    cleanUpResources()
+    os._exit(0)
 
 def main():
-    print("Siavash Hanifi - Move Dot Application")
-    runBackend()
-    print("Started backend, listening at localhost:8080")
-    runFrontend()
-    print("Serving frontend at http://localhost:80")
-    waitForUserToExit()
+    try:
+        print("Siavash Hanifi - Move Dot Application")
+        runBackend()
+        print("Started backend, listening at localhost:8080")
+        runFrontend()
+        print("Serving frontend at http://localhost:8081")
+        waitForUserToExit()
+        cleanUpResources()
+    except e:
+        cleanUpResources()
+        os._exit(1)
 
+signal.signal(signal.SIGINT, handleStopSignals)
+signal.signal(signal.SIGTERM, handleStopSignals)
 main()
