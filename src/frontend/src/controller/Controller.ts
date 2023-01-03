@@ -34,9 +34,24 @@ export class Controller{
         this.#notifyObservers();
     }
 
-    async moveDotPosition(direction: DotMovementDirections): Promise<void>
+    async moveDotUp() : Promise<void>
     {
-        await this.#backendCommunicator.sendMoveDotRequest(direction);
+        await this.#backendCommunicator.sendMoveDotRequest(DotMovementDirections.UP);
+    }
+
+    async moveDotDown() : Promise<void>
+    {
+        await this.#backendCommunicator.sendMoveDotRequest(DotMovementDirections.DOWN);
+    }
+
+    async moveDotLeft() : Promise<void>
+    {
+        await this.#backendCommunicator.sendMoveDotRequest(DotMovementDirections.LEFT);
+    }
+
+    async moveDotRight() : Promise<void>
+    {
+        await this.#backendCommunicator.sendMoveDotRequest(DotMovementDirections.RIGHT);
     }
 
     getDotPosition() : DotPosition

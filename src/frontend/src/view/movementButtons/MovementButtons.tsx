@@ -1,6 +1,5 @@
 import { CSSProperties } from "react";
 import { controller } from "../..";
-import { DotMovementDirections } from "../../model/DotMovementDirections";
 
 const movementButtonsCSS: CSSProperties = 
 {
@@ -15,12 +14,12 @@ export default function MovementButtons()
 {
    return(
     <div className="MovementButtons" style={movementButtonsCSS}>
-        <button onClick={() => {controller.moveDotPosition(DotMovementDirections.UP)}}>move up</button>
+        <button onClick={() => {controller.moveDotUp()}}>move up</button>
         <div className="RightLeftButtons">
-            <button onClick={() => {controller.moveDotPosition(DotMovementDirections.LEFT)}}>move left</button>
-            <button onClick={() => {controller.moveDotPosition(DotMovementDirections.RIGHT)}}>move right</button>
+            <button onClick={() => {controller.moveDotLeft()}}>move left</button>
+            <button onClick={() => {controller.moveDotRight()}}>move right</button>
         </div>
-        <button onClick={() => {controller.moveDotPosition(DotMovementDirections.DOWN)}}>move down</button>
+        <button onClick={() => {controller.moveDotDown()}}>move down</button>
     </div>
    ); 
 }
