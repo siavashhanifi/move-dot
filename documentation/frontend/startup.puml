@@ -7,6 +7,6 @@ Index -> DotPosition**: DotPosition()
 Index <-- BackendCommunicator: dotPosition
 
 Index -> Controller**: Controller(backendCommunicator, dotPosition)
-
+Index -> Controller: pollForCurrentDotPosition(100 : milliseconds)
 
 @enduml
