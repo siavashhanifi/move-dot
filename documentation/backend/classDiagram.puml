@@ -1,0 +1,34 @@
+package restservice
+{
+    class DotController
+    {
+        -dotPosition: DotPosition
+        +moveDot(direction: DotMovementDirections): void
+        +getDotPosition(): DotPosition
+    }
+}
+
+package model
+{
+    class DotPosition
+    {
+        -x : int
+        -y: int
+        -handleMoveUp()
+        -handleMoveDown()
+        -handleMoveLeft()
+        -handleMoveRight()
+        +move(direction: DotMovementDirections)
+        +DotPosition(): DotPosition
+    }
+
+    enum DotMovementDirections
+    {
+        UP
+        DOWN
+        LEFT
+        RIGHT
+    }
+}
+
+DotController --> model

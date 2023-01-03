@@ -30,6 +30,7 @@ package controller {
         -dotPosition : DotPosition
         -dotPositionChangedNotifiers: Array<Function>
         -notifyDotPositionObservers()
+        +Controller(BackendCommunicator, DotPosition)
         +pollForCurrentDotPosition(milliseconds : int) void
         +moveDotUp() : void
         +moveDotDown() : void
@@ -42,6 +43,7 @@ package network {
     class BackendCommunicator{
         -ip : String
         -port : int
+        +BackendCommunicator(ip, port): BackendCommunicator
         +sendGetDotPositionRequest()
         +sendMoveDotRequest()
     }
@@ -59,6 +61,7 @@ class DotPosition
     {
         -x : int
         -y : int
+        +DotPosition() : DotPosition
         +getX() : int
         +getY() : int
         +setX() : void
