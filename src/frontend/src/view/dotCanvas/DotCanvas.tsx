@@ -1,4 +1,4 @@
-import { CSSProperties, Dispatch,SetStateAction, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { controller } from "../..";
 import { DotPosition } from "../../model/DotPosition";
 
@@ -53,13 +53,14 @@ function DotContainer( {dotPosition,  dotContainerPosition}: DotContainerProps):
     );
 }
 
-//Called from the controller to trigger a rerender when the dot position is updated
-export let rerenderDotPosition: Dispatch<SetStateAction<DotPosition>> = () => {};
-
 export default function DotCanvas()
 {
     const [dotPosition, setDotPosition] = useState(controller.getDotPosition());
-    rerenderDotPosition = setDotPosition;
+
+    useEffect(( ) => {
+        //Only ran once when this component is mounted
+        controller.addDotPositionChangedNotifier(setDotPosition);
+    }, []);
 
     return(
         <div className="DotCanvas" style={dotCanvasCSS}>
