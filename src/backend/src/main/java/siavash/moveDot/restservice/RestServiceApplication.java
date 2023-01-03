@@ -1,4 +1,4 @@
-package com.example.restservice;
+package siavash.moveDot.restservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.example.model;
+package siavash.moveDot.model;
 
 public enum DotMovementDirection
 {
