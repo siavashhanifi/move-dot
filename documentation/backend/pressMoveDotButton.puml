@@ -1,8 +1,20 @@
 @startuml
 
 user -> frontend: pressMoveDotButton(direction)
-frontend -> backend: {http PATCH /dotPosition, direction}
+frontend -> backend: {HTTP PATCH /dotPosition, direction}
 
-MoveDotController -> DotPosition: move(Direction)
+backend_MoveDotController -> DotPosition: movePosition(direction)
+
+alt direction == up
+    DotPosition -> DotPosition: handleMoveUp()
+else direction == down
+    DotPosition -> DotPosition: handleMoveDown()
+else direction == right
+    DotPosition -> DotPosition: handleMoveRight()
+else direction == left
+    DotPosition -> DotPosition: handleMoveLeft()
+end
+
+frontend <-- backend: {HTTP OK 200}
 
 @enduml

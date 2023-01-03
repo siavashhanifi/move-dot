@@ -2,13 +2,18 @@
 
 user -> frontend: pressMoveDotButton(direction)
 
-alt direction == x
-MovementButtons -> Button**: Button( onClick: moveDotX )
-MovementButtons <-- Button: moveDotXButton
-else direction == y 
-MovementButtons -> Button**: Button( onClick: moveDotY )
-MovementButtons <-- Button: moveDotYButton
+alt direction == up
+MovementButtons -> Controller: controller.moveDotUp()
+else direction == down
+MovementButtons -> Controller: controller.moveDotDown()
+else direction == left
+MovementButtons -> Controller: controller.moveDotLeft()
+else direction == right
+MovementButtons -> Controller: controller.moveDotRight()
 end
 
+Controller -> BackendCommunicator: sendMoveDotRequest(direction: DotMovementDirections)
+frontend -> backend : {HTTP PATCH, /moveDot}
+frontend <-- backend : { HTTP OK 200 } 
 
 @enduml

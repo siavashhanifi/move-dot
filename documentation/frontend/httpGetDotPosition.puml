@@ -1,0 +1,11 @@
+@startuml
+
+index -> Controller: pollForCurrentDotPosition(100 : milliseconds)
+Controller -> Controller: setTimeout(() => {\npollForCurrentDotPosition(milliseconds); \nsendGetDotPositionRequest();\n notifyObservers()}, milliseconds)
+Controller -> BackendCommunincator: sendGetDotPosition()
+frontend -> backend : {HTTP GET /dotPosition}
+frontend <-- backend : {HTTP OK 200, {x, y} }
+Controller <-- BackendCommunincator : dotPosition
+Controller -> Controller: notifyObservers()
+
+@enduml

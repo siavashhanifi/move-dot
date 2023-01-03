@@ -1,0 +1,12 @@
+@startuml
+
+frontend -> backend : {HTTP GET /dotPosition}
+
+backend -> DotController: getDotPosition()
+DotController -> DotPosition: getX()
+DotController <-- DotPosition: x
+DotController -> DotPosition: getY()
+DotController <-- DotPosition: y
+frontend <-- backend: { HTTP OK 200, {x, y} }
+
+@enduml
