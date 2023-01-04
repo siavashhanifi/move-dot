@@ -1,4 +1,9 @@
-package restservice
+package startup
+{
+    class Entrypoint
+}
+
+package controllers
 {
     class DotController
     {
@@ -31,4 +36,5 @@ package model
     }
 }
 
+Entrypoint --> controllers
 DotController --> model
