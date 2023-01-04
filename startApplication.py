@@ -19,6 +19,7 @@ def runFrontend():
                                           "8081"], stdout=subprocess.DEVNULL)
 
 def waitForUserToExit():
+    global httpServerProcess
     httpServerProcess.wait()
 
 def cleanUpResources():
